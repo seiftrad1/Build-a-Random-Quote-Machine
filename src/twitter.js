@@ -93,8 +93,7 @@ export default function Twitter() {
         ))} */}
         {randomQuote ? (
           <>
-            {" "}
-            <p>{randomQuote.text}</p>
+            aa <p>{randomQuote.text}</p>
             <p>{randomQuote.author || "No author"}</p>
           </>
         ) : (
