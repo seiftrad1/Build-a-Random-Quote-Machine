@@ -64,12 +64,14 @@ const Buttons = styled.div`
 `;
 const Seif = styled.p`
   font-size: 25px;
-  color: blue;
+  color: black;
 `;
 
 export default function Twitter() {
   const [quotes, setQuotes] = useState([]);
   const [randomQuote, setRandomQuote] = useState("");
+  const [color, setColor] = useState("#16a085");
+
   useEffect(() => {
     async function fetchData() {
       const response = await fetch("https://type.fit/api/quotes");
@@ -80,28 +82,45 @@ export default function Twitter() {
     }
     fetchData();
   }, []);
+
   const newQuote = () => {
+    const colors = [
+      "#16a085",
+      "#27ae60",
+      "#2c3e50",
+      "#f39c12",
+      "#e74c3c",
+      "#9b59b6",
+      "#FB6964",
+      "#342224",
+      "#472E32",
+      "#BDBB99",
+      "#77B1A9",
+      "#73A857",
+    ];
     let randIndex = Math.floor(Math.random() * quotes.length);
     setRandomQuote(quotes[randIndex]);
+    let randColorIndex = Math.floor(Math.random() * colors.length);
+    setColor(colors[randColorIndex]);
   };
   return (
-    <WidgetWrapper>
-      <Seif>
-        {" "}
-        {/* {quotes.map((quote) => (
+    <header className="App-header" style={{ backgroundColor: color }}>
+      <WidgetWrapper>
+        <Seif>
+          {" "}
+          {/* {quotes.map((quote) => (
           <div>{quote.text}</div>
         ))} */}
-        {randomQuote ? (
-          <>
-            aa <p>{randomQuote.text}</p>
-            <p>{randomQuote.author || "No author"}</p>
-          </>
-        ) : (
-          <h2>Loading...</h2>
-        )}
-      </Seif>
-      <Buttons>
-        <Button onClick={click}>
+          {randomQuote ? (
+            <>
+              <p>{randomQuote.text}</p>
+              <p>{randomQuote.author || "No author"}</p>
+            </>
+          ) : (
+            <h2>Loading...</h2>
+          )}
+        </Seif>
+        <Buttons>
           {" "}
           <a
             href={
@@ -111,20 +130,32 @@ export default function Twitter() {
               )
             }
           >
-            <i className="fa fa-twitter"> </i>
+            <Button style={{ backgroundColor: color }}>
+              {" "}
+              <i className="fa fa-twitter"> </i>
+            </Button>{" "}
+          </a>{" "}
+          <a
+            href={
+              "https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption=" +
+              encodeURIComponent(randomQuote.author) +
+              "&content=" +
+              encodeURIComponent(randomQuote.text) +
+              "&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button"
+            }
+          >
+            <Button style={{ backgroundColor: color }}>
+              {" "}
+              <i className="fa fa-tumblr"> </i>
+            </Button>{" "}
           </a>
-        </Button>{" "}
-        <Button>
-          {" "}
-          <a href="https://facebook.com">
-            <i className="fa fa-tumblr"> </i>
-          </a>
-        </Button>{" "}
-        <Button2 onClick={newQuote}> New quote</Button2>{" "}
-      </Buttons>
-      <br />
-      <br />
-    </WidgetWrapper>
+          <Button2 onClick={newQuote}> New quote</Button2>{" "}
+        </Buttons>
+        <br />
+        <br />{" "}
+      </WidgetWrapper>{" "}
+    </header>
+
     //   <div id="container">
     //     <div id="quote-box">
     //       <div class="quote-text">
