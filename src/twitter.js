@@ -54,15 +54,16 @@ const Author = styled.span`
   height: auto;
   clear: both;
   padding-top: 20px;
-  font-size: 1em;
+  font-size: 0.6em;
   text-align: right;
 `;
 const Buttons = styled.div`
   width: 400px;
   display: block;
   margin: auto;
+  margin-top: 30px;
 `;
-const Seif = styled.p`
+const Text = styled.p`
   font-size: 25px;
   color: black;
 `;
@@ -106,20 +107,19 @@ export default function Twitter() {
   return (
     <header className="App-header" style={{ backgroundColor: color }}>
       <WidgetWrapper>
-        <Seif>
-          {" "}
-          {/* {quotes.map((quote) => (
-          <div>{quote.text}</div>
-        ))} */}
-          {randomQuote ? (
-            <>
-              <p>{randomQuote.text}</p>
-              <p>{randomQuote.author || "No author"}</p>
-            </>
-          ) : (
-            <h2>Loading...</h2>
-          )}
-        </Seif>
+        {randomQuote ? (
+          <>
+            <Text>
+              {" "}
+              <i class="fa fa-quote-left"> </i> {randomQuote.text}
+            </Text>
+            <Author style={{ marginLeft: 250 }}>
+              -{randomQuote.author || "No author"}
+            </Author>
+          </>
+        ) : (
+          <h2>Loading...</h2>
+        )}
         <Buttons>
           {" "}
           <a
@@ -155,43 +155,5 @@ export default function Twitter() {
         <br />{" "}
       </WidgetWrapper>{" "}
     </header>
-
-    //   <div id="container">
-    //     <div id="quote-box">
-    //       <div class="quote-text">
-    //         <i class="fa fa-quote-left"> </i>
-    //         <span id="text">
-    //           First, have a definite, clear practical ideal; a goal, an
-    //           objective. Second, have the necessary means to achieve your ends;
-    //           wisdom, money, materials, and methods. Third, adjust all your
-    //           means to that end.
-    //         </span>
-    //       </div>
-    //       <div class="quote-author">
-    //         - <span id="author">seif</span>
-    //       </div>
-    //       <div class="buttons">
-    //         <a
-    //           class="button"
-    //           id="tweet-quote"
-    //           title="Tweet this quote!"
-    //           target="_top"
-    //         >
-    //           <i class="fa fa-twitter"></i>
-    //         </a>
-    //         <a
-    //           class="button"
-    //           id="tumblr-quote"
-    //           title="Post this quote on tumblr!"
-    //           target="_blank"
-    //         >
-    //           <i class="fa fa-tumblr"></i>
-    //         </a>
-    //         <button class="button" id="new-quote">
-    //           New quote
-    //         </button>
-    //       </div>
-    //     </div>
-    //   </div>
   );
 }
